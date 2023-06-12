@@ -11,6 +11,7 @@ opt.conceallevel = 0
 opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
+opt.fillchars = { eob = " " }
 opt.foldenable = false
 opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 opt.guicursor = ""
