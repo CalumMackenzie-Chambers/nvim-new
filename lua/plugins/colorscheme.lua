@@ -5,7 +5,7 @@ return {
     name = "rose-pine",
     opts = {
       variant = "moon",
-      disable_background = true,
+      disable_background = false,
       highlight_groups = {
         NeoTreeDirectoryName = { fg = "rose" },
         NeoTreeDirectoryIcon = { fg = "rose" },

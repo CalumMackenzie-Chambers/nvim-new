@@ -43,6 +43,11 @@ return {
   },
   config = function()
     local opts = {
+      defaults = {
+        layout_config = {
+          preview_width = 0.7
+        },
+      },
       extensions = {
         undo = {
           mappings = {
