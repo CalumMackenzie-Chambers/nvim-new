@@ -11,6 +11,8 @@ return {
     ensure_installed = {
       "bash",
       "c_sharp",
+      "comment",
+      "css",
       "html",
       "javascript",
       "json",
@@ -22,6 +24,9 @@ return {
       "python",
       "query",
       "regex",
+      "scss",
+      "sql",
+      "toml",
       "tsx",
       "typescript",
       "vim",
