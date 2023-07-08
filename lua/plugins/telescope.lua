@@ -16,6 +16,7 @@ return {
     { "<leader>fD", "<cmd>Telescope diagnostics<cr>", desc = "Find Workspace diagnostics" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find Help Pages" },
     { "<leader>fo", "<cmd>Telescope vim_options<cr>", desc = "Find Options" },
+    { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Projects" },
     {
       "<leader>fu",
       function()

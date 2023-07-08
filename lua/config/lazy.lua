@@ -13,14 +13,16 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    { import = "plugins" },
+    {
+      import = "plugins"
+    },
   },
   defaults = {
     lazy = true,
     version = false,
   },
   install = { colorscheme = { "rose-pine" } },
-  checker = { enabled = true },
+  checker = { enabled = false },
   performance = {
     rtp = {
       disabled_plugins = {

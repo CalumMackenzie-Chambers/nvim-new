@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.python3_host_prog = "$HOME/.pyenv/versions/3.10.6/envs/neovim310/bin/python3.10"
+vim.g.python3_host_prog = "$HOME/.pyenv/versions/neovim310/bin/python3.10"
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 

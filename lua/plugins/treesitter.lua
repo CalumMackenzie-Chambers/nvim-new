@@ -1,5 +1,10 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+
+  dependencies = {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+  },
+
   version = false,
   event = { "BufReadPost", "BufNewFile" },
   build = function()
@@ -33,6 +38,10 @@ return {
       "vimdoc",
       "yaml",
     },
+
+    contex_commentstring = {
+      enable = true,
+    }
   },
 
   config = function(_, opts)
