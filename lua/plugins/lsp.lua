@@ -11,6 +11,7 @@ return {
     },
     {'williamboman/mason-lspconfig.nvim'},
 
+    {'zbirenbaum/copilot-cmp'},
     {'hrsh7th/nvim-cmp'},
     {'hrsh7th/cmp-buffer'},
     {'hrsh7th/cmp-path'},
@@ -47,8 +48,17 @@ return {
     cmp_mappings['<Tab>'] = nil
     cmp_mappings['<S-Tab>'] = nil
 
+    local cmp_sources = {
+      {name = 'copilot'},
+      {name = 'luasnip', keyword_length = 2},
+      {name = 'nvim_lsp', keyword_length = 3},
+      {name = 'path'},
+      {name = 'buffer', keyword_length = 3},
+    }
+
     lsp.setup_nvim_cmp({
-      mapping = cmp_mappings
+      mapping = cmp_mappings,
+      sources = cmp_sources
     })
 
     lsp.set_sign_icons({
