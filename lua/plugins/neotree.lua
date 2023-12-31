@@ -46,19 +46,19 @@ return {
     },
     filesystem = {
       components = {
-        harpoon_index = function(config, node)
-          local Marked = require("harpoon.mark")
-          local path = node:get_id()
-          local succuss, index = pcall(Marked.get_index_of, path)
-          if succuss and index and index > 0 then
-            return {
-              text = string.format("  %d ", index),
-              highlight = config.highlight or "NeoTreeDirectoryIcon",
-            }
-          else
-            return {}
-          end
-        end,
+        -- harpoon_index = function(config, node)
+        --   local Marked = require("harpoon.mark")
+        --   local path = node:get_id()
+        --   local succuss, index = pcall(Marked.get_index_of, path)
+        --   if succuss and index and index > 0 then
+        --     return {
+        --       text = string.format("  %d ", index),
+        --       highlight = config.highlight or "NeoTreeDirectoryIcon",
+        --     }
+        --   else
+        --     return {}
+        --   end
+        -- end,
       },
       renderers = {
         directory = {
@@ -69,7 +69,7 @@ return {
         file = {
           { "icon" },
           { "name", use_git_status_colors = false },
-          { "harpoon_index" },
+          -- { "harpoon_index" },
           { "diagnostics" },
         },
       },

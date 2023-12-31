@@ -24,6 +24,28 @@ return {
   },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
+    require('lspconfig.configs').templ = {
+      default_config = {
+        name = 'templ',
+        cmd = {"templ", "lsp"},
+        filetypes = {"templ"},
+        root_dir = function()
+          return vim.fn.getcwd()
+        end,
+      },
+    }
+
+    require('lspconfig.configs').htmx = {
+      default_config = {
+        name = 'htmx',
+        cmd = {"htmx-lsp", "lsp"},
+        filetypes = {"html", "templ"},
+        root_dir = function()
+          return vim.fn.getcwd()
+        end,
+      }
+    }
+
     local lsp = require("lsp-zero")
 
     lsp.preset("recommended")
@@ -83,6 +105,16 @@ return {
       vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
     end)
 
+    require('lspconfig').tailwindcss.setup({
+      filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+    })
+
+    require('lspconfig').emmet_ls.setup({
+      filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+    })
+
+    lsp.configure('templ', {force_setup = true})
+    lsp.configure('htmx', {force_setup = true})
     lsp.setup()
 
     vim.diagnostic.config({

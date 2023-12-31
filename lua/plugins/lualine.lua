@@ -1,5 +1,8 @@
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    'AndreM222/copilot-lualine'
+  },
   event = "VeryLazy",
   opts = function()
     return {
@@ -26,6 +29,7 @@ return {
         },
         lualine_x = {
           {
+            'copilot',
             "diff",
             symbols = {
               added = " ",

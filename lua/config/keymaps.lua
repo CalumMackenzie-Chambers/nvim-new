@@ -34,3 +34,7 @@ map("n", "<S-l>", "$", { noremap = true })
 map("v", "<S-h>", "^", { noremap = true })
 map("v", "<S-l>", "$", { noremap = true })
 
+-- Dealing with word wrap
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
+

@@ -1,3 +1,8 @@
+vim.filetype.add({
+  extension = {
+    postcss = 'css',
+  }
+})
 vim.api.nvim_set_keymap("n", "<space>", "<Nop>", {noremap = true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -34,6 +39,7 @@ opt.shortmess:append({ W = true, I = true, c = true })
 opt.showmode = false
 opt.sidescrolloff = 8
 opt.signcolumn = "yes"
+opt.ignorecase = true
 opt.smartcase = true
 opt.smartindent = true
 opt.splitbelow = true
