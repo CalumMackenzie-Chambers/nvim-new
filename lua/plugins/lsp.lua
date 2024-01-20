@@ -1,14 +1,9 @@
 return {
   'VonHeikemen/lsp-zero.nvim',
-  branch = 'v2.x',
+  branch = 'v3.x',
   dependencies = {
     {'neovim/nvim-lspconfig'},
-    {
-      'williamboman/mason.nvim',
-      build = function()
-        pcall(vim.cmd, 'MasonUpdate')
-      end,
-    },
+    { 'williamboman/mason.nvim' },
     {'williamboman/mason-lspconfig.nvim'},
 
     {'zbirenbaum/copilot-cmp'},
@@ -24,39 +19,45 @@ return {
   },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    require('lspconfig.configs').templ = {
-      default_config = {
-        name = 'templ',
-        cmd = {"templ", "lsp"},
-        filetypes = {"templ"},
-        root_dir = function()
-          return vim.fn.getcwd()
-        end,
-      },
-    }
-
-    require('lspconfig.configs').htmx = {
-      default_config = {
-        name = 'htmx',
-        cmd = {"htmx-lsp", "lsp"},
-        filetypes = {"html", "templ"},
-        root_dir = function()
-          return vim.fn.getcwd()
-        end,
-      }
-    }
-
     local lsp = require("lsp-zero")
 
-    lsp.preset("recommended")
 
-    lsp.ensure_installed({
-      'tsserver',
-      'rust_analyzer',
+    require('mason').setup({})
+    require('mason-lspconfig').setup({
+      ensure_installed = {
+        'tsserver',
+        'rust_analyzer',
+        'gopls',
+        'bashls',
+        'cssls',
+        'emmet_ls',
+        'html',
+        'jsonls',
+        'lua_ls',
+        'marksman',
+        'pyright',
+        'tailwindcss',
+        'templ',
+        'yamlls',
+      },
+      handlers = {
+        lsp.default_setup,
+        lua_ls = function ()
+          local lua_opts = lsp.nvim_lua_ls()
+          require('lspconfig').lua_ls.setup(lua_opts)
+        end,
+        tailwindcss = function ()
+          require('lspconfig').tailwindcss.setup({
+            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+          })
+        end,
+        emmet_ls = function ()
+          require('lspconfig').emmet_ls.setup({
+            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+          })
+        end,
+      },
     })
-
-    lsp.nvim_workspace()
-
 
     local cmp = require('cmp')
     local cmp_select = {behavior = cmp.SelectBehavior.Select}
@@ -78,47 +79,43 @@ return {
       {name = 'buffer', keyword_length = 3},
     }
 
-    lsp.setup_nvim_cmp({
+    cmp.setup({
+      formatting = lsp.cmp_format(),
       mapping = cmp_mappings,
-      sources = cmp_sources
+      sources = cmp_sources,
+      select = cmp_select
     })
 
     lsp.set_sign_icons({
-        error = " ",
-        warn = " ",
-        hint = " ",
-        info = " ",
+      error = " ",
+      warn = " ",
+      hint = " ",
+      info = " ",
     })
 
-    lsp.on_attach(function(_, bufnr)
-      local opts = {buffer = bufnr, remap = false}
+    lsp.on_attach(function(client, bufnr)
+      local opts = { noremap = true, silent = true }
+      local keymap = vim.api.nvim_buf_set_keymap
 
-      vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-      vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-      vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-      vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-      vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-      vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-      vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-      vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-      vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+      keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+      keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+      keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+      keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+      keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+      keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()()<CR>", opts)
+      keymap(bufnr, "n", "<leader>vca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+      keymap(bufnr, "n", "<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+      if client.supports_method "textDocument/inlayHint" then
+        vim.lsp.inlay_hint.enable(bufnr, true)
+      end
     end)
 
-    require('lspconfig').tailwindcss.setup({
-      filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
-    })
-
-    require('lspconfig').emmet_ls.setup({
-      filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
-    })
-
-    lsp.configure('templ', {force_setup = true})
-    lsp.configure('htmx', {force_setup = true})
     lsp.setup()
 
     vim.diagnostic.config({
-      virtual_text = true
+      virtual_text = false
     })
   end,
 }

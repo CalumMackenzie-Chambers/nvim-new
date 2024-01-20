@@ -21,8 +21,9 @@ require("lazy").setup({
     lazy = true,
     version = false,
   },
-  install = { colorscheme = { "rose-pine" } },
+  install = { colorscheme = { "gruvbox", "rose-pine" } },
   checker = { enabled = false },
+  change_detection = { enabled = true, notify = false },
   performance = {
     rtp = {
       disabled_plugins = {
