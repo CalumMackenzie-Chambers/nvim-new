@@ -23,22 +23,8 @@ return {
 
     require("mason").setup({})
     require("mason-lspconfig").setup({
-      ensure_installed = {
-        "tsserver",
-        "rust_analyzer",
-        "gopls",
-        "bashls",
-        "cssls",
-        "emmet_ls",
-        "html",
-        "jsonls",
-        "lua_ls",
-        "marksman",
-        "pyright",
-        "tailwindcss",
-        "templ",
-        "yamlls",
-      },
+      -- stylua: ignore start
+      ensure_installed = { "tsserver", "rust_analyzer", "gopls", "bashls", "cssls", "emmet_ls", "html", "jsonls", "lua_ls", "marksman", "pyright", "tailwindcss", "templ", "yamlls", },
       handlers = {
         lsp.default_setup,
         lua_ls = function()
@@ -47,110 +33,15 @@ return {
         end,
         tailwindcss = function()
           require("lspconfig").tailwindcss.setup({
-            filetypes = {
-              "aspnetcorerazor",
-              "astro",
-              "astro-markdown",
-              "blade",
-              "clojure",
-              "django-html",
-              "htmldjango",
-              "edge",
-              "eelixir",
-              "elixir",
-              "ejs",
-              "erb",
-              "eruby",
-              "gohtml",
-              "haml",
-              "handlebars",
-              "hbs",
-              "html",
-              "html-eex",
-              "heex",
-              "jade",
-              "leaf",
-              "liquid",
-              "markdown",
-              "mdx",
-              "mustache",
-              "njk",
-              "nunjucks",
-              "php",
-              "razor",
-              "slim",
-              "twig",
-              "css",
-              "less",
-              "postcss",
-              "sass",
-              "scss",
-              "stylus",
-              "sugarss",
-              "javascript",
-              "javascriptreact",
-              "reason",
-              "rescript",
-              "typescript",
-              "typescriptreact",
-              "vue",
-              "svelte",
-              "templ",
-            },
+
+            -- stylua: ignore start
+            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ", },
           })
         end,
         emmet_ls = function()
           require("lspconfig").emmet_ls.setup({
-            filetypes = {
-              "aspnetcorerazor",
-              "astro",
-              "astro-markdown",
-              "blade",
-              "clojure",
-              "django-html",
-              "htmldjango",
-              "edge",
-              "eelixir",
-              "elixir",
-              "ejs",
-              "erb",
-              "eruby",
-              "gohtml",
-              "haml",
-              "handlebars",
-              "hbs",
-              "html",
-              "html-eex",
-              "heex",
-              "jade",
-              "leaf",
-              "liquid",
-              "markdown",
-              "mdx",
-              "mustache",
-              "njk",
-              "nunjucks",
-              "php",
-              "razor",
-              "slim",
-              "twig",
-              "css",
-              "less",
-              "postcss",
-              "sass",
-              "scss",
-              "stylus",
-              "sugarss",
-              "javascript",
-              "javascriptreact",
-              "reason",
-              "rescript",
-              "typescript",
-              "typescriptreact",
-              "vue",
-              "svelte",
-              "templ",
-            },
+            -- stylua: ignore start
+            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ", },
           })
         end,
       },
@@ -203,12 +94,9 @@ return {
       keymap(bufnr, "n", "<leader>vca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
       keymap(bufnr, "n", "<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       keymap(bufnr, "n", "<leader>vft", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-      vim.keymap.set("i", "<C-h>", function()
-        vim.lsp.buf.signature_help()
-      end, opts)
 
       if client.supports_method("textDocument/inlayHint") then
-        vim.lsp.inlay_hint.enable(bufnr, true)
+        vim.lsp.inlay_hint(bufnr, true)
       end
     end)
 

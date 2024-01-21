@@ -1,7 +1,7 @@
 return {
   "LunarVim/breadcrumbs.nvim",
   lazy = false,
-  requires = {
+  dependencies = {
     "SmiteshP/nvim-navic",
   },
   config = true,
