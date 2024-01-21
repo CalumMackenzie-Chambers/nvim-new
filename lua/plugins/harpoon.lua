@@ -49,4 +49,7 @@ return {
       desc = "Harpoon quick menu",
     },
   },
+  init = function()
+    require("harpoon"):setup()
+  end,
 }
