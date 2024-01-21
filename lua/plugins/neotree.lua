@@ -63,12 +63,12 @@ return {
       renderers = {
         directory = {
           { "icon" },
-          { "name", use_git_status_colors = false },
-          { "diagnostics", errors_only = true, hide_when_expanded = true },
+          { "name",        use_git_status_colors = false },
+          { "diagnostics", errors_only = true,           hide_when_expanded = true },
         },
         file = {
           { "icon" },
-          { "name", use_git_status_colors = false },
+          { "name",       use_git_status_colors = false },
           -- { "harpoon_index" },
           { "diagnostics" },
         },

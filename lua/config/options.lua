@@ -1,9 +1,9 @@
 vim.filetype.add({
   extension = {
-    postcss = 'css',
-  }
+    postcss = "css",
+  },
 })
-vim.api.nvim_set_keymap("n", "<space>", "<Nop>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<space>", "<Nop>", { noremap = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/neovim310/bin/python3.10"

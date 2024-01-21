@@ -21,19 +21,19 @@ return {
     },
     lazy = false,
     -- init = function()
-      --   vim.cmd("colorscheme rose-pine")
-      -- end,
+    --   vim.cmd("colorscheme rose-pine")
+    -- end,
   },
   {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
     opts = {
-      contrast = "hard"
+      contrast = "hard",
     },
     lazy = false,
     init = function()
       vim.o.background = "dark"
       vim.cmd("colorscheme gruvbox")
     end,
-  }
+  },
 }

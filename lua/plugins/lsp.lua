@@ -1,89 +1,186 @@
 return {
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v3.x',
+  "VonHeikemen/lsp-zero.nvim",
+  branch = "v3.x",
   dependencies = {
-    {'neovim/nvim-lspconfig'},
-    { 'williamboman/mason.nvim' },
-    {'williamboman/mason-lspconfig.nvim'},
+    { "neovim/nvim-lspconfig" },
+    { "williamboman/mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim" },
 
-    {'zbirenbaum/copilot-cmp'},
-    {'hrsh7th/nvim-cmp'},
-    {'hrsh7th/cmp-buffer'},
-    {'hrsh7th/cmp-path'},
-    {'saadparwaiz1/cmp_luasnip'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/cmp-nvim-lua'},
+    { "zbirenbaum/copilot-cmp" },
+    { "hrsh7th/nvim-cmp" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-path" },
+    { "saadparwaiz1/cmp_luasnip" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-nvim-lua" },
 
-    {'L3MON4D3/LuaSnip'},
-    {'rafamadriz/friendly-snippets'},
+    { "L3MON4D3/LuaSnip" },
+    { "rafamadriz/friendly-snippets" },
   },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lsp = require("lsp-zero")
 
-
-    require('mason').setup({})
-    require('mason-lspconfig').setup({
+    require("mason").setup({})
+    require("mason-lspconfig").setup({
       ensure_installed = {
-        'tsserver',
-        'rust_analyzer',
-        'gopls',
-        'bashls',
-        'cssls',
-        'emmet_ls',
-        'html',
-        'jsonls',
-        'lua_ls',
-        'marksman',
-        'pyright',
-        'tailwindcss',
-        'templ',
-        'yamlls',
+        "tsserver",
+        "rust_analyzer",
+        "gopls",
+        "bashls",
+        "cssls",
+        "emmet_ls",
+        "html",
+        "jsonls",
+        "lua_ls",
+        "marksman",
+        "pyright",
+        "tailwindcss",
+        "templ",
+        "yamlls",
       },
       handlers = {
         lsp.default_setup,
-        lua_ls = function ()
+        lua_ls = function()
           local lua_opts = lsp.nvim_lua_ls()
-          require('lspconfig').lua_ls.setup(lua_opts)
+          require("lspconfig").lua_ls.setup(lua_opts)
         end,
-        tailwindcss = function ()
-          require('lspconfig').tailwindcss.setup({
-            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+        tailwindcss = function()
+          require("lspconfig").tailwindcss.setup({
+            filetypes = {
+              "aspnetcorerazor",
+              "astro",
+              "astro-markdown",
+              "blade",
+              "clojure",
+              "django-html",
+              "htmldjango",
+              "edge",
+              "eelixir",
+              "elixir",
+              "ejs",
+              "erb",
+              "eruby",
+              "gohtml",
+              "haml",
+              "handlebars",
+              "hbs",
+              "html",
+              "html-eex",
+              "heex",
+              "jade",
+              "leaf",
+              "liquid",
+              "markdown",
+              "mdx",
+              "mustache",
+              "njk",
+              "nunjucks",
+              "php",
+              "razor",
+              "slim",
+              "twig",
+              "css",
+              "less",
+              "postcss",
+              "sass",
+              "scss",
+              "stylus",
+              "sugarss",
+              "javascript",
+              "javascriptreact",
+              "reason",
+              "rescript",
+              "typescript",
+              "typescriptreact",
+              "vue",
+              "svelte",
+              "templ",
+            },
           })
         end,
-        emmet_ls = function ()
-          require('lspconfig').emmet_ls.setup({
-            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" }
+        emmet_ls = function()
+          require("lspconfig").emmet_ls.setup({
+            filetypes = {
+              "aspnetcorerazor",
+              "astro",
+              "astro-markdown",
+              "blade",
+              "clojure",
+              "django-html",
+              "htmldjango",
+              "edge",
+              "eelixir",
+              "elixir",
+              "ejs",
+              "erb",
+              "eruby",
+              "gohtml",
+              "haml",
+              "handlebars",
+              "hbs",
+              "html",
+              "html-eex",
+              "heex",
+              "jade",
+              "leaf",
+              "liquid",
+              "markdown",
+              "mdx",
+              "mustache",
+              "njk",
+              "nunjucks",
+              "php",
+              "razor",
+              "slim",
+              "twig",
+              "css",
+              "less",
+              "postcss",
+              "sass",
+              "scss",
+              "stylus",
+              "sugarss",
+              "javascript",
+              "javascriptreact",
+              "reason",
+              "rescript",
+              "typescript",
+              "typescriptreact",
+              "vue",
+              "svelte",
+              "templ",
+            },
           })
         end,
       },
     })
 
-    local cmp = require('cmp')
-    local cmp_select = {behavior = cmp.SelectBehavior.Select}
+    local cmp = require("cmp")
+    local cmp_select = { behavior = cmp.SelectBehavior.Select }
     local cmp_mappings = lsp.defaults.cmp_mappings({
-      ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-      ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-      ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+      ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+      ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+      ["<C-y>"] = cmp.mapping.confirm({ select = true }),
       ["<C-Space>"] = cmp.mapping.complete(),
     })
 
-    cmp_mappings['<Tab>'] = nil
-    cmp_mappings['<S-Tab>'] = nil
+    cmp_mappings["<Tab>"] = nil
+    cmp_mappings["<S-Tab>"] = nil
 
     local cmp_sources = {
-      {name = 'copilot'},
-      {name = 'luasnip', keyword_length = 2},
-      {name = 'nvim_lsp', keyword_length = 3},
-      {name = 'path'},
-      {name = 'buffer', keyword_length = 3},
+      { name = "copilot" },
+      { name = "luasnip",  keyword_length = 2 },
+      { name = "nvim_lsp", keyword_length = 3 },
+      { name = "path" },
+      { name = "buffer",   keyword_length = 3 },
     }
 
     cmp.setup({
       formatting = lsp.cmp_format(),
       mapping = cmp_mappings,
       sources = cmp_sources,
-      select = cmp_select
+      select = cmp_select,
     })
 
     lsp.set_sign_icons({
@@ -105,9 +202,12 @@ return {
       keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()()<CR>", opts)
       keymap(bufnr, "n", "<leader>vca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
       keymap(bufnr, "n", "<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-      vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+      keymap(bufnr, "n", "<leader>vft", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+      vim.keymap.set("i", "<C-h>", function()
+        vim.lsp.buf.signature_help()
+      end, opts)
 
-      if client.supports_method "textDocument/inlayHint" then
+      if client.supports_method("textDocument/inlayHint") then
         vim.lsp.inlay_hint.enable(bufnr, true)
       end
     end)
@@ -115,7 +215,7 @@ return {
     lsp.setup()
 
     vim.diagnostic.config({
-      virtual_text = false
+      virtual_text = false,
     })
   end,
 }

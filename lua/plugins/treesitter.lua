@@ -3,8 +3,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
 
     dependencies = {
-      'JoosepAlviste/nvim-ts-context-commentstring',
-      'windwp/nvim-ts-autotag'
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
     },
 
     version = false,
@@ -46,7 +46,7 @@ return {
       },
       autotag = {
         enable = true,
-      }
+      },
     },
 
     config = function(_, opts)
