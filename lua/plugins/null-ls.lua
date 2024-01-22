@@ -15,7 +15,6 @@ return {
         format.prettier,
         format.black,
         format.isort,
-        format.gofmt,
         lint.flake8,
       },
     }
