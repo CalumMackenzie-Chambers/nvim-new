@@ -95,9 +95,6 @@ return {
       keymap(bufnr, "n", "<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       keymap(bufnr, "n", "<leader>vft", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
-      if client.supports_method("textDocument/inlayHint") then
-        vim.lsp.inlay_hint(bufnr, true)
-      end
     end)
 
     lsp.setup()
