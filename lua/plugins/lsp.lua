@@ -103,6 +103,12 @@ return {
       virtual_text = true,
       underline = false,
       signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN]  = " ",
+          [vim.diagnostic.severity.INFO]  = " ",
+          [vim.diagnostic.severity.HINT]  = " ",
+        },
         linehl = {
           [vim.diagnostic.severity.ERROR] = "DiagnosticErrorLn",
           [vim.diagnostic.severity.WARN]  = "DiagnosticWarnLn",
@@ -110,6 +116,7 @@ return {
           [vim.diagnostic.severity.HINT]  = "DiagnosticHintLn",
         },
       },
+      severity_sort = true,
     })
   end,
 }
