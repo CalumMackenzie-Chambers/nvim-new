@@ -16,7 +16,6 @@ return {
         format.black,
         format.isort,
         format.gofmt,
-        lint.flake8,
       },
     }
   end,
