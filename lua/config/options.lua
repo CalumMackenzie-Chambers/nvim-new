@@ -6,7 +6,7 @@ vim.filetype.add({
 vim.api.nvim_set_keymap("n", "<space>", "<Nop>", { noremap = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.python3_host_prog = "$HOME/.pyenv/versions/neovim310/bin/python3.10"
+vim.g.python3_host_prog = "/home/calum/.pyenv/shims/python"
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 
