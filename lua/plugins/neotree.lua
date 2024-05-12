@@ -21,11 +21,11 @@ return {
       sources = {
         {
           source = "filesystem",
-          display_name = "  Files ",
+          display_name = "󰙅  Files ",
         },
         {
           source = "git_status",
-          display_name = " Git ",
+          display_name = "󰊢 Git ",
         },
       },
       content_layout = "center",

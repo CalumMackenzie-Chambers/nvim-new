@@ -6,7 +6,6 @@ return {
     local null_ls = require("null-ls")
 
     local format = null_ls.builtins.formatting
-    local lint = null_ls.builtins.diagnostics
 
     return {
       debug = false,
@@ -16,7 +15,6 @@ return {
         format.black,
         format.isort,
         format.gofmt,
-        lint.flake8,
       },
     }
   end,
