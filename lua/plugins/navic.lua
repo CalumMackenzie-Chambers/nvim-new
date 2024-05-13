@@ -9,6 +9,7 @@ return {
       highlight = true,
       lsp = {
         auto_attach = true,
+        preference = { "html" }
       },
       click = true,
       separator = " " .. icons.ui.ChevronRight .. " ",
