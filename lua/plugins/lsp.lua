@@ -35,13 +35,20 @@ return {
           require("lspconfig").tailwindcss.setup({
 
             -- stylua: ignore start
-            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ", },
+            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ"},
           })
         end,
         emmet_ls = function()
           require("lspconfig").emmet_ls.setup({
             -- stylua: ignore start
-            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ", },
+            filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ"},
+          })
+        end,
+        omnisharp = function()
+          require("lspconfig").omnisharp.setup({
+            -- stylua: ignore start
+            cmd = { "omnisharp", "--languageserver" },
+            filetypes = { "csharp" },
           })
         end,
       },
@@ -95,15 +102,28 @@ return {
       keymap(bufnr, "n", "<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       keymap(bufnr, "n", "<leader>vft", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
-      if client.supports_method("textDocument/inlayHint") then
-        vim.lsp.inlay_hint(bufnr, true)
-      end
     end)
 
     lsp.setup()
 
     vim.diagnostic.config({
-      virtual_text = false,
+      virtual_text = true,
+      underline = false,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN]  = " ",
+          [vim.diagnostic.severity.INFO]  = " ",
+          [vim.diagnostic.severity.HINT]  = " ",
+        },
+        linehl = {
+          [vim.diagnostic.severity.ERROR] = "DiagnosticErrorLn",
+          [vim.diagnostic.severity.WARN]  = "DiagnosticWarnLn",
+          [vim.diagnostic.severity.INFO]  = "DiagnosticInfoLn",
+          [vim.diagnostic.severity.HINT]  = "DiagnosticHintLn",
+        },
+      },
+      severity_sort = true,
     })
   end,
 }
