@@ -16,6 +16,7 @@ return {
 
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
+    { "CalumMackenzie-Chambers/vim-dadbod-completion" },
   },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
@@ -42,13 +43,6 @@ return {
           require("lspconfig").emmet_ls.setup({
             -- stylua: ignore start
             filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ"},
-          })
-        end,
-        omnisharp = function()
-          require("lspconfig").omnisharp.setup({
-            -- stylua: ignore start
-            cmd = { "omnisharp", "--languageserver" },
-            filetypes = { "csharp" },
           })
         end,
       },
@@ -79,6 +73,14 @@ return {
       mapping = cmp_mappings,
       sources = cmp_sources,
       select = cmp_select,
+    })
+
+    cmp.setup.filetype({ "sql" }, {
+      sources = {
+        { name = "vim-dadbod-completion" },
+        { name = "copilot" },
+        { name = "buffer", keyword_length = 3 },
+      },
     })
 
     lsp.set_sign_icons({
