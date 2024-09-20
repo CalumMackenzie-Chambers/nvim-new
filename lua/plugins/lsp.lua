@@ -5,6 +5,7 @@ return {
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
+    { "Hoffs/omnisharp-extended-lsp.nvim" },
 
     { "zbirenbaum/copilot-cmp" },
     { "hrsh7th/nvim-cmp" },
@@ -16,6 +17,7 @@ return {
 
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
+    { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
   },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
@@ -42,6 +44,27 @@ return {
           require("lspconfig").emmet_ls.setup({
             -- stylua: ignore start
             filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ", },
+          })
+        end,
+        omnisharp = function()
+          require("lspconfig").omnisharp.setup({
+            handlers = {
+              ["textDocument/definition"] = function(...)
+                return require("omnisharp_extended").handler(...)
+              end,
+            },
+            keys = {
+              {
+                "gd",
+                function()
+                  require("omnisharp_extended").telescope_lsp_definitions()
+                end,
+                desc = "Goto Definition",
+              },
+            },
+            enable_roslyn_analyzers = true,
+            organize_imports_on_format = true,
+            enable_import_completion = true,
           })
         end,
       },
@@ -72,6 +95,14 @@ return {
       mapping = cmp_mappings,
       sources = cmp_sources,
       select = cmp_select,
+    })
+
+    cmp.setup.filetype({
+      sources = {
+        { name = "vim-dadbod-completion" },
+        { name = "copilot" },
+        { name = "buffer", keyword_length = 3 },
+      }
     })
 
     lsp.set_sign_icons({
