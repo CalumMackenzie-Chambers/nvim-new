@@ -26,7 +26,7 @@ return {
     require("mason").setup({})
     require("mason-lspconfig").setup({
       -- stylua: ignore start
-      ensure_installed = { "tsserver", "rust_analyzer", "gopls", "bashls", "cssls", "emmet_ls", "html", "jsonls", "lua_ls", "marksman", "pyright", "tailwindcss", "templ", "yamlls", },
+      ensure_installed = { "ts_ls", "rust_analyzer", "gopls", "bashls", "cssls", "emmet_ls", "html", "jsonls", "lua_ls", "marksman", "pyright", "tailwindcss", "templ", "yamlls", },
       handlers = {
         lsp.default_setup,
         lua_ls = function()
