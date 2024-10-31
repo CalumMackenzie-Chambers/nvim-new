@@ -1,6 +1,10 @@
 vim.filetype.add({
   extension = {
     templ = "templ",
+    aspx = "html",
+    ascx = "html",
+    Master = "html",
+    cshtml = "razor"
   },
 })
 require("config.options")
