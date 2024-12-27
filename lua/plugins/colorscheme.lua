@@ -10,7 +10,6 @@ return {
     init = function()
       vim.o.background = "dark"
       vim.cmd("colorscheme gruvbox")
-
       local hl = vim.api.nvim_set_hl
 
       hl(0, "DiagnosticErrorLn", { bg = "#402120" })
@@ -19,4 +18,23 @@ return {
       hl(0, "DiagnosticHintLn", { bg = "#2c3930" })
     end,
   },
+  -- {
+  --   "sainnhe/everforest",
+  --   version = false,
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.g.everforest_enable_italic = true
+  --     vim.g.everforest_background = 'hard'
+  --     vim.g.everforest_better_performance = 1
+  --     vim.cmd.colorscheme('everforest')
+  --
+  --     local hl = vim.api.nvim_set_hl
+  --
+  --     hl(0, "DiagnosticErrorLn", { bg = "#402120" })
+  --     hl(0, "DiagnosticWarnLn", { bg = "#423821" })
+  --     hl(0, "DiagnosticInfoLn", { bg = "#253436" })
+  --     hl(0, "DiagnosticHintLn", { bg = "#2c3930" })
+  --   end
+  -- }
 }

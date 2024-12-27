@@ -21,7 +21,7 @@ require("lazy").setup({
     lazy = true,
     version = false,
   },
-  install = { colorscheme = { "gruvbox", "rose-pine" } },
+  install = { colorscheme = { "everforest" ,"gruvbox", "rose-pine" } },
   checker = { enabled = false },
   change_detection = { enabled = true, notify = false },
   performance = {
