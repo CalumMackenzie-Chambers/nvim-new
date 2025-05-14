@@ -191,7 +191,7 @@ return {
           local sym = vim.fn.expand("<cword>")
 
           -- 1) Function/Sub globally
-          local func_pat = string.format("(?:Function|Sub)\\s+%s\\b", sym)
+          local func_pat = string.format("(?:Function|Sub|Class|Enum|Interface)\\s+%s\\b", sym)
           local func_args = {
             "rg",
             "--vimgrep",
