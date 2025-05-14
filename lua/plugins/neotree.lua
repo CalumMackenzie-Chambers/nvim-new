@@ -21,11 +21,11 @@ return {
       sources = {
         {
           source = "filesystem",
-          display_name = "  Files ",
+          display_name = "󰉓  Files ",
         },
         {
           source = "git_status",
-          display_name = " Git ",
+          display_name = " Git ",
         },
       },
       content_layout = "center",
@@ -36,10 +36,10 @@ return {
         added = "",
         modified = "",
         deleted = "✖",
-        renamed = "",
+        renamed = "󰁕",
         untracked = "",
         ignored = "",
-        unstaged = "",
+        unstaged = "󰄱",
         staged = "",
         conflict = "",
       },
@@ -63,12 +63,12 @@ return {
       renderers = {
         directory = {
           { "icon" },
-          { "name",        use_git_status_colors = false },
-          { "diagnostics", errors_only = true,           hide_when_expanded = true },
+          { "name", use_git_status_colors = false },
+          { "diagnostics", errors_only = true, hide_when_expanded = true },
         },
         file = {
           { "icon" },
-          { "name",       use_git_status_colors = false },
+          { "name", use_git_status_colors = false },
           -- { "harpoon_index" },
           { "diagnostics" },
         },

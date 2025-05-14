@@ -4,6 +4,7 @@ vim.filetype.add({
     aspx = "html",
     ascx = "html",
     Master = "html",
+    cshtml = "razor"
   },
 })
 require("config.options")

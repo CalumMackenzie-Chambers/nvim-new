@@ -136,4 +136,5 @@ local function close_iis_logs()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>pl', ':vsp<CR>:terminal pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\\Users\\Calum\\Documents\\PowerShell\\Scripts\\attach_iis_logs.ps1"<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>pc', ':q<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pa', ':vsp<CR>:terminal pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\\Users\\Calum\\Documents\\PowerShell\\Scripts\\attach_iis_admin_logs.ps1"<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pg', ':vsp<CR>:terminal pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\\Users\\Calum\\Documents\\PowerShell\\Scripts\\attach_iis_prescribing_logs.ps1"<CR>', { noremap = true, silent = true })
