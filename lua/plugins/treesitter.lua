@@ -1,66 +1,35 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
 
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      "windwp/nvim-ts-autotag",
-    },
-
-    version = false,
-    event = { "BufReadPost", "BufNewFile" },
-    build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end,
-    cmd = { "TSUpdateSync" },
-    opts = {
-      highlight = { enable = true },
-      ensure_installed = {
-        "bash",
+    config = function()
+      local highlight_filetypes = {
         "c_sharp",
-        "comment",
         "css",
         "html",
         "javascript",
         "json",
         "lua",
-        "luadoc",
-        "luap",
         "markdown",
-        "markdown_inline",
         "python",
-        "query",
-        "regex",
         "scss",
         "sql",
         "toml",
         "tsx",
         "typescript",
         "vim",
-        "vimdoc",
-        "yaml",
-      },
+        "yaml"
+      }
 
-      contex_commentstring = {
-        enable = true,
-      },
-      autotag = {
-        enable = true,
-      },
-    },
-
-    config = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        local added = {}
-        opts.ensure_installed = vim.tbl_filter(function(lang)
-          if added[lang] then
-            return false
-          end
-          added[lang] = true
-          return true
-        end, opts.ensure_installed)
-      end
-      require("nvim-treesitter.configs").setup(opts)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = highlight_filetypes,
+        callback = function()
+          vim.treesitter.start()
+        end,
+      })
     end,
   },
 }

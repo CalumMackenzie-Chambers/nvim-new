@@ -18,15 +18,22 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("lazy").setup({
+  defaults = {
+    lazy = false,
+    version = false,
+  },
   spec = {
     { import = "plugins" },
   },
   install = { colorscheme = { "gruvbox" } },
-  checker = { enabled = true },
-  defaults = {
-    lazy = true,
-    version = false,
+  checker = { enabled = false },
+  change_detection = {
+    enabled = true,
+    notify = false,
   },
+  ui = {
+    browser = "zen",
+ },
   performance = {
     rtp = {
       disabled_plugins = {

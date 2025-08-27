@@ -70,6 +70,34 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "vbnet", "vb" },
+  callback = function(args)
+    local bufnr = args.buf
+
+    vim.treesitter.stop(bufnr)
+
+    -- INFO: if performance starts to suck uncomment the following line
+    vim.lsp.semantic_tokens.enable(false, { bufnr = bufnr })
+    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+    --
+    -- INFO: if performance starts to suck uncomment the following line
+    -- vim.lsp.document_color.enable(false, bufnr)
+    vim.diagnostic.config({
+      update_in_insert = false,
+    }, vim.api.nvim_create_namespace("vbnet_diagnostics"))
+
+    vim.wo.foldenable = false
+
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+    for _, client in pairs(clients) do
+      if client.flags then
+        client.flags.debounce_text_changes = 1000
+      end
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "gitcommit", "markdown" },
   callback = function()
@@ -86,5 +114,18 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end
     local file = vim.loop.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Go to type definition" })
+    vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show line diagnostics" })
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Show references" })
+    vim.keymap.set({ "n", "v" }, "gca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code actions" })
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename symbol" })
   end,
 })

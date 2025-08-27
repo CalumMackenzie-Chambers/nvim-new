@@ -4,10 +4,20 @@ vim.filetype.add({
     aspx = "html",
     ascx = "html",
     Master = "html",
-    cshtml = "razor"
+    vb = "vbnet",
   },
 })
+
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
+require("config.diagnostics")
 require("config.lazy")
+
+vim.lsp.config("*", {
+  root_markers = { ".git" },
+})
+
+vim.lsp.enable({
+  "luals",
+})
