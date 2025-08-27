@@ -3,11 +3,11 @@ return {
   dependencies = {
     "AndreM222/copilot-lualine",
   },
-  event = "VeryLazy",
+  lazy = false,
   opts = function()
     return {
       options = {
-        theme = "auto",
+        theme = "gruvbox",
         globalstatus = true,
         disabled_filetypes = { statusline = { "dashboard", "alpha" } },
       },
