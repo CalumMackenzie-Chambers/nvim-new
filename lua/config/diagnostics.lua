@@ -77,9 +77,25 @@ local function setup_diagnostics()
       source = true,
       header = "",
       prefix = "",
+      max_width = 80,
     },
     update_in_insert = false,
   })
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
+---@diagnostic disable-next-line: duplicate-set-field
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = vim.tbl_deep_extend('force', {
+    border = "rounded",
+    winhighlight = "Normal:Normal,FloatBorder:Normal,EndOfBuffer:Normal",
+    max_width = 80,
+    max_height = 20,
+    wrap = true,
+    wrap_at = 80,
+  }, opts or {})
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 
   vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()

@@ -70,34 +70,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "vbnet", "vb" },
-  callback = function(args)
-    local bufnr = args.buf
-
-    vim.treesitter.stop(bufnr)
-
-    -- INFO: if performance starts to suck uncomment the following line
-    vim.lsp.semantic_tokens.enable(false, { bufnr = bufnr })
-    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-
-    -- INFO: if performance starts to suck uncomment the following line
-    vim.lsp.document_color.enable(false, bufnr)
-    vim.diagnostic.config({
-      update_in_insert = false,
-    }, vim.api.nvim_create_namespace("vbnet_diagnostics"))
-
-    vim.wo.foldenable = false
-
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
-    for _, client in pairs(clients) do
-      if client.flags then
-        client.flags.debounce_text_changes = 1000
-      end
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "gitcommit", "markdown" },
   callback = function()

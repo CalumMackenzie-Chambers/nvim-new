@@ -11,6 +11,7 @@ vim.filetype.add({
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
+require("config.vb")
 require("config.diagnostics")
 require("config.lazy")
 
@@ -20,4 +21,5 @@ vim.lsp.config("*", {
 
 vim.lsp.enable({
   "luals",
+  "vb_ls"
 })
