@@ -35,6 +35,14 @@ return {
     Value = " ",
     Variable = " ",
   },
+  sources = {
+    lsp = " ",
+    buffer = " ",
+    path = " ",
+    snippets = " ",
+    luasnip = " ",
+    omni = " ",
+  },
   git = {
     LineAdded = " ",
     LineModified = " ",

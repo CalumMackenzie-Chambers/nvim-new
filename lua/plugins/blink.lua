@@ -49,16 +49,61 @@ return {
           },
         },
         menu = {
+          border = "rounded",
+          winhighlight = 'Normal:Normal,FloatBorder:Normal,CursorLine:PmenuSel,Search:None',
+          min_width=50,
           draw = {
+            columns = {{ "kind_icon", "label", gap = 1 }, { "source_id", gap=2 }},
             treesitter = { "lsp" },
+            components = {
+              label = {
+                width = { max =43, fill = true},
+                text = function(ctx)
+                  local l = ctx.label
+                  local d = ctx.label_description
+                  local max_width = 43
+
+                  if d ~= "" then
+                    local combined = l .. " " .. d
+
+                    if #combined > max_width then
+                      local available = max_width - #l - 4
+
+                      if available > 0 then
+                        local trunc = d:sub(1, available)
+                        combined = l .. " " .. trunc .. "..."
+                      else
+                        combined = l:sub(1, max_width -3) .. "..."
+                      end
+                    end
+
+                    return combined .. string.rep(" ", max_width - #combined)
+                  else
+                    if #l > max_width then
+                      l = l:sub(1, max_width -3) .. "..."
+                    end
+                    return l .. string.rep(" ", max_width - #l)
+                  end
+                end,
+              },
+              source_id = {
+                text = function(ctx)
+                  return (icons.sources[ctx.source_id] or "")
+                end,
+              },
+            }
           },
         },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
+          window = {
+            border = "rounded",
+            winhighlight = 'Normal:Normal,FloatBorder:Normal,EndOfBuffer:Normal',
+          }
         },
         ghost_text = {
-          enabled = false, -- No AI completion
+          enabled = false,
         },
       },
 

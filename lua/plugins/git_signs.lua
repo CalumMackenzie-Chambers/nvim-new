@@ -23,7 +23,7 @@ return {
     current_line_blame_opts = {
       ignore_whitespace = true,
     },
-    sign_priority = 6
+    sign_priority = 10
   },
   config = function(_, opts)
     require("gitsigns").setup(opts)
