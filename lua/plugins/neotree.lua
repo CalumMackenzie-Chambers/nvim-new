@@ -54,7 +54,7 @@ return {
           leave_dirs_open = false,
         },
         use_libuv_file_watcher = true,
-        hijack_netrw_behavior = "open_default",
+        hijack_netrw_behavior = "disabled",
         renderers = {
           directory = {
             { "icon" },
@@ -70,7 +70,7 @@ return {
       },
 
       window = {
-        position = "left",
+        position = "right",
         width = 40,
         mappings = {
           ["<space>"] = "none",
