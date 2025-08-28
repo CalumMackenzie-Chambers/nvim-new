@@ -47,11 +47,76 @@ return {
   end,
 
   init = function()
+    local color = require("util.color")
+
     vim.filetype.add({
       extension = {
         razor = "razor",
         cshtml = "razor",
       },
     })
+
+    local function setup_csharp_highlights()
+      color.create_derived_highlight("Type", "TypeUnderlined", { underline = true })
+      color.create_derived_highlight("Function", "FunctionRegular", { bold = false })
+    end
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = setup_csharp_highlights,
+    })
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      pattern = "*.cs",
+      callback = function()
+        local token_mappings = {
+          -- Methods and functions
+          ["method"] = "FunctionRegular",
+          ["extensionMethod"] = "FunctionRegular",
+
+          -- Types
+          ["class"] = "Type",
+          ["recordClass"] = "Type",
+          ["struct"] = "Type",
+          ["interface"] = "TypeUnderlined",
+          ["enum"] = "Type",
+          ["delegate"] = "Type",
+
+          -- Variables and identifiers
+          ["variable"] = "Identifier",
+          ["parameter"] = "@parameter",
+          ["property"] = "Identifier",
+          ["field"] = "Identifier",
+
+          -- Keywords
+          ["keyword"] = "Keyword",
+          ["controlKeyword"] = "Keyword",
+
+          -- Constants and literals
+          ["constant"] = "Constant",
+          ["enumMember"] = "Constant",
+
+          -- Special
+          ["regexGrouping"] = "Special",
+          ["namespace"] = "Namespace",
+          ["string"] = "String",
+          ["number"] = "Number",
+          ["comment"] = "Comment",
+
+          -- XML doc comments - try various possible names
+          ["xmlDocComment"] = "Comment",
+          ["xmlDocCommentName"] = "Comment",
+          ["xmlDocCommentDelimiter"] = "Comment",
+          ["xmlDocCommentAttributeName"] = "Comment",
+          ["xmlDocCommentAttribute"] = "Comment",
+          ["xmlDocCommentText"] = "Comment",
+        }
+
+        for token_type, hl_group in pairs(token_mappings) do
+          vim.api.nvim_set_hl(0, "@lsp.type." .. token_type, { link = hl_group })
+        end
+      end,
+    })
+
+    setup_csharp_highlights()
   end,
 }

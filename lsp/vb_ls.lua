@@ -12,16 +12,10 @@ vim.lsp.config("vb_ls", {
   },
   capabilities = (function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- INFO: if performance starts to suck uncomment the following line
-    -- capabilities.textDocument.semanticTokens = nil
-
+    capabilities.textDocument.semanticTokens = nil
     capabilities.textDocument.inlayHint = nil
+    capabilities.textDocument.documentSymbol = nil
 
-    -- INFO: if performance starts to suck uncomment the following line
-    -- capabilities.textDocument.documentSymbol = nil
-
-    -- INFO: this means we can't search the whole solution for symbols but it
-    -- really slows everything down when it is enabled
     capabilities.workspace.symbol = nil
     return capabilities
   end)(),

@@ -7,7 +7,6 @@ return {
 
     config = function()
       local highlight_filetypes = {
-        "c_sharp",
         "css",
         "html",
         "javascript",

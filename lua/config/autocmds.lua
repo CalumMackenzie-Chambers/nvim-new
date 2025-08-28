@@ -79,9 +79,9 @@ vim.api.nvim_create_autocmd("FileType", {
     -- INFO: if performance starts to suck uncomment the following line
     vim.lsp.semantic_tokens.enable(false, { bufnr = bufnr })
     vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-    --
+
     -- INFO: if performance starts to suck uncomment the following line
-    -- vim.lsp.document_color.enable(false, bufnr)
+    vim.lsp.document_color.enable(false, bufnr)
     vim.diagnostic.config({
       update_in_insert = false,
     }, vim.api.nvim_create_namespace("vbnet_diagnostics"))
