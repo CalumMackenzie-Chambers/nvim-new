@@ -33,6 +33,7 @@ require("lazy").setup({
   },
   ui = {
     browser = "zen",
+    border = "rounded"
  },
   performance = {
     rtp = {
