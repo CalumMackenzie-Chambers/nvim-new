@@ -21,5 +21,6 @@ vim.lsp.config("*", {
 
 vim.lsp.enable({
   "luals",
-  "vb_ls"
+  "vb_ls",
+  "yamlls"
 })

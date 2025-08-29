@@ -49,6 +49,13 @@ return {
   init = function()
     local color = require("util.color")
 
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "cs",
+      callback = function()
+        vim.treesitter.stop()
+      end,
+    })
+
     vim.filetype.add({
       extension = {
         razor = "razor",
@@ -102,7 +109,7 @@ return {
           ["number"] = "Number",
           ["comment"] = "Comment",
 
-          -- XML doc comments - try various possible names
+          -- XML doc comments
           ["xmlDocComment"] = "Comment",
           ["xmlDocCommentName"] = "Comment",
           ["xmlDocCommentDelimiter"] = "Comment",
