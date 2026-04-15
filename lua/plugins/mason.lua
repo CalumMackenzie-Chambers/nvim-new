@@ -1,11 +1,10 @@
 return {
-  "mason-org/mason.nvim",
-  opts = {},
-  init = function()
-    require("mason").setup({
+  src = 'https://github.com/mason-org/mason.nvim',
+  setup = function()
+    require('mason').setup({
       registries = {
-        "github:mason-org/mason-registry",
-        "github:Crashdummyy/mason-registry",
+        'github:mason-org/mason-registry',
+        'github:Crashdummyy/mason-registry',
       },
     })
   end,

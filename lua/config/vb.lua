@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
     -- INFO: The below are really slow,
     vim.lsp.semantic_tokens.enable(false, { bufnr = bufnr })
-    vim.lsp.document_color.enable(false, bufnr)
+    vim.lsp.document_color.enable(false, { bufnr = bufnr })
 
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
     for _, client in pairs(clients) do

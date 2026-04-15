@@ -1,19 +1,18 @@
 return {
-  "saghen/blink.cmp",
-  version = "*",
-  dependencies = {
-    "rafamadriz/friendly-snippets",
-    "xzbdmw/colorful-menu.nvim"
+  src = 'https://github.com/saghen/blink.cmp',
+  -- Track the latest tagged release; blink ships prebuilt fuzzy matchers per tag.
+  version = vim.version.range('*'),
+  deps = {
+    'https://github.com/rafamadriz/friendly-snippets',
+    'https://github.com/xzbdmw/colorful-menu.nvim',
   },
-  lazy = false,
+  setup = function()
+    local icons = require('util.icons')
 
-  opts = function()
-    local icons = require("util.icons")
-
-    return {
+    require('blink.cmp').setup({
       appearance = {
         use_nvim_cmp_as_default = false,
-        nerd_font_variant = "mono",
+        nerd_font_variant = 'mono',
         kind_icons = {
           Text = icons.kind.Text,
           Method = icons.kind.Method,
@@ -45,23 +44,21 @@ return {
 
       completion = {
         accept = {
-          auto_brackets = {
-            enabled = true,
-          },
+          auto_brackets = { enabled = true },
         },
         menu = {
-          border = "rounded",
-          winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:PmenuSel,Search:None",
+          border = 'rounded',
+          winhighlight = 'Normal:Normal,FloatBorder:Normal,CursorLine:PmenuSel,Search:None',
           min_width = 60,
           draw = {
-            columns = { { "kind_icon" }, { "label", gap = 1 } },
+            columns = { { 'kind_icon' }, { 'label', gap = 1 } },
             components = {
               label = {
                 text = function(ctx)
-                  return require("colorful-menu").blink_components_text(ctx)
+                  return require('colorful-menu').blink_components_text(ctx)
                 end,
                 highlight = function(ctx)
-                  return require("colorful-menu").blink_components_highlight(ctx)
+                  return require('colorful-menu').blink_components_highlight(ctx)
                 end,
               },
             },
@@ -71,26 +68,18 @@ return {
           auto_show = true,
           auto_show_delay_ms = 200,
           window = {
-            border = "rounded",
-            winhighlight = "Normal:Normal,FloatBorder:Normal,EndOfBuffer:Normal",
+            border = 'rounded',
+            winhighlight = 'Normal:Normal,FloatBorder:Normal,EndOfBuffer:Normal',
           },
         },
-        ghost_text = {
-          enabled = false,
-        },
+        ghost_text = { enabled = false },
       },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
 
-      keymap = {
-        preset = "default",
-      },
-    }
-  end,
-
-  config = function(_, opts)
-    require("blink.cmp").setup(opts)
+      keymap = { preset = 'default' },
+    })
   end,
 }

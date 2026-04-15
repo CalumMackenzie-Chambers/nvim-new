@@ -1,7 +1,6 @@
 return {
-  'nvim-mini/mini.pairs',
-  version = false,
-  config = function()
+  src = 'https://github.com/nvim-mini/mini.pairs',
+  setup = function()
     require('mini.pairs').setup()
 
     vim.api.nvim_create_autocmd('FileType', {
